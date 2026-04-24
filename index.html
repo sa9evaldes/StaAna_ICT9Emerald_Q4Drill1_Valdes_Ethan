@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #kWh, h3 {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAmMCDiXyG22ONq2C4eNyHQtKmOB9rEPI-IF0wbxlIVM_xNreBSqGRuRVuQ5VE4MvA7Gds7GYs7mcsqWGVsOebpVV7sJtE1q5obfEvOHCLG3ZXeALhUEuzmIyj6YpwPWlQ5nLpa4-mdKF_/s1600-rw/gundam+perfect+file+(3).jpg');
+        }
+    </style>
+</head>
+<body>
+    <div class="container w-75 rounded-5 d-flex justify-content-center align-items-center vh-100">
+        <div>
+            <div>
+                <h3 style="background-color: DodgerBlue;">Mobile Suit/Armor Power Consumption Classifier</h3>
+            </div>
+            <div class="bg-dark text-light rounded-5 d-flex justify-content-center align-items-center p-3">
+                
+                <br>
+                <h1 id="kWh" class="m-2">kWh</h1>
+                <input type="text" class="form-control" id="consumption" placeholder="Input kilowatt per hour (Min. 800kWh)">
+                <button type="button" class="btn btn-warning m-2" onclick="check_class()">Consumption Classification</button>
+                <br><br>
+                <p><span id="message1" style="color: red;" class="fst-italic"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function check_class() {
+            var checker = parseFloat(document.getElementById("consumption").value);
+            var A = "Low Power Mobile Suit"; //300-800kWh
+            var B = "Early Standard Power Mobile Suit"; //801-1100kWh
+            var C = "Beam Weaponry Capable Mobile Suit"; //1101-1800kWh
+            var D = "High Power Mobile Suit"; //1801-3200kWh
+            var E = "Very High Power Mobile Suit"; //3201-10000kWh
+            var F = "Mobile Armor/Mobile Armor-like"; //above 10000kWh
+
+            // Check for invalid input
+            if (isNaN(checker) || checker < 0) {
+                document.getElementById("message1").innerHTML = "Please input a valid number (800 or greater).";
+                return;
+            }
+            
+            document.getElementById("message1").innerHTML = ""; // Clear error message
+            
+            if (checker <= 300) {
+                alert(A + " : Mobile Pod, e.g. RB-79 Ball");
+            } else if (checker <= 800) {
+                alert(B + " : Early OYW Mobile Suit, e.g. MS-06 Zaku II");
+            } else if (checker <= 1100) {
+                alert(C + " : Late OYW Mobile Suit, e.g. RX-78-2 Gundam");
+            } else if (checker <= 1800) {
+                alert(D + " : Gryps War Era Mobile Suit, e.g. MSZ-006 Zeta Gundam.");
+            } else if (checker <= 3200) {
+                alert(E + " : Late UC Mobile Suit, e.g. RX-0 Unicorn Gundam");
+            } else {
+                alert(F + " : Mobile Armor or Mobile Armor-like, e.g. NZ-999 Neo Zeong");
+            }
+            
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
+
